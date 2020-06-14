@@ -1,6 +1,13 @@
 pipeline {
 	agent any
 	stages{
+		stage ("Run Sonar"){
+			steps{
+			input ("Want to run Sonar?")
+				bat "mvn sonar:sonar"
+			  }
+			}	
+	
 		stage ("Clean"){
 			steps{
 				bat "mvn clean"
