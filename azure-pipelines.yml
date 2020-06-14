@@ -6,6 +6,13 @@
 trigger:
 - master
 
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Building Maven'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
