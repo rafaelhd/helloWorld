@@ -3,7 +3,7 @@ pipeline {
 	stages{
 		stage ("Clean"){
 			steps{
-			shell mvn "clean"
+			sh mvn "clean"
 				}
 			}
 	
