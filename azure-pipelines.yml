@@ -30,5 +30,9 @@ steps:
     archiveType: 'zip'
     archiveFile: 'hello-world.war'
     replaceExistingArchive: true  
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: ./dist
+    targetFolder: $(Build.ArtifactStagingDirectory)    
 - task: PublishBuildArtifacts@1
  
