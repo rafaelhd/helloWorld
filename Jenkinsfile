@@ -21,7 +21,7 @@ pipeline {
 		stage ("package"){
 			steps{
 				bat "mvn package"
-				archive "dist/*.war"
+				archiveArtifacts "dist/*.war"
 			  }
 			}
 	
