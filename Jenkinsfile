@@ -32,7 +32,7 @@ dockerImage = ''
                 echo 'Starting to build docker image'
 
                 script {
-                    docker.build("rafaelhd/trance_repo:${BUILD_NUMBER}")
+			def dockerImage = docker.build registry + ":${BUILD_NUMBER"}
                 
               		 }
            	    }
@@ -41,7 +41,7 @@ dockerImage = ''
 		steps{
 			script {
 				docker.withRegistry( '', registryCredential ) {
-				docker.push()
+				dockerImage.push()
 }
 }
 }
