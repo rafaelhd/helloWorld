@@ -1,6 +1,6 @@
 pipeline {
 environment {
-registry = "rafaelhd/trancerepo"
+registry = "rafaelhd/helloworld-app"
 registryCredential = 'Docker_credentials'
 dockerImage = ''
 }	
