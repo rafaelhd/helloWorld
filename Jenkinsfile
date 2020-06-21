@@ -32,7 +32,7 @@ dockerImage = ''
                 echo 'Starting to build docker image'
 
                 script {
-			def dockerImage = docker.build registry + ":$BUILD_NUMBER"
+			dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 
               		 }
            	    }
