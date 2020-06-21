@@ -32,16 +32,16 @@ dockerImage = ''
                 echo 'Starting to build docker image'
 
                 script {
-                    def customImage = docker.build("rafaelhd/trance_repo:${BUILD_NUMBER}")
+                    docker.build("rafaelhd/trance_repo:${BUILD_NUMBER}")
                 
               		 }
            	    }
         	}
-	stage('Deploy our image') {
-steps{
-script {
-docker.withRegistry( '', registryCredential ) {
-customImage.push()
+	stage('Deploy Image') {
+		steps{
+			script {
+				docker.withRegistry( '', registryCredential ) {
+				docker.push()
 }
 }
 }
