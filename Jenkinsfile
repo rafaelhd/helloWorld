@@ -6,10 +6,9 @@ pipeline {
 				bat "mvn clean"
 			  }
 			}
-        stage('build && SonarQube analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
-			
                         bat 'mvn sonar:sonar'
                     }
                 }
@@ -20,6 +19,16 @@ pipeline {
 				archiveArtifacts "dist/*.war"
 			  }
 			}
+		stage('Build image') {
+            steps {
+                echo 'Starting to build docker image'
+
+                script {
+                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+                
+                }
+            }
+        }
 	
 	}
 	
