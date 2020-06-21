@@ -32,7 +32,7 @@ dockerImage = ''
                 echo 'Starting to build docker image'
 
                 script {
-                    def customImage = docker.build("helloWorld:${BUILD_NUMBER}")
+                    def customImage = docker.build("rafaelhd/trance_repo:${BUILD_NUMBER}")
                 
               		 }
            	    }
