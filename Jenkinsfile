@@ -1,4 +1,9 @@
 pipeline {
+environment {
+registry = "rafaelhd/trancerepo"
+registryCredential = 'rafaelhd'
+dockerImage = ''
+}	
 	agent any
 	stages{
 		stage ("Clean"){
@@ -6,36 +11,42 @@ pipeline {
 				bat "mvn clean"
 			  }
 			}
+		
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                         bat 'mvn sonar:sonar'
                     }
-                }
-        }	
+              	  }
+       		 }	
+		
 		stage ("package"){
 			steps{
 				bat "mvn package"
 				archiveArtifacts "dist/*.war"
 			  }
 			}
+		
 		stage('Build image') {
             steps {
                 echo 'Starting to build docker image'
 
                 script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+                    def customImage = docker.build("helloWorld:${BUILD_NUMBER}")
                 
-                }
-            }
-        }
-	stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'Docker_credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-    }
+              		 }
+           	    }
+        	}
+	stage('Deploy our image') {
+steps{
+script {
+docker.withRegistry( '', registryCredential ) {
+dockerImage.push()
+}
+}
+}
+}
 	
 	}
 	
-	}
+}
