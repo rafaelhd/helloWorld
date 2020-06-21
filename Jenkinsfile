@@ -7,6 +7,11 @@ pipeline {
 				bat "mvn sonar:sonar"
 			  }
 			}	
+		stage("Quality Gate 1") {
+            		steps {
+                	waitForQualityGate abortPipeline: true
+            			}
+        		}
 	
 		stage ("Clean"){
 			steps{
