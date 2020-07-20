@@ -3,13 +3,13 @@ pipeline {
 	stages{
 		stage ("Clean"){
 			steps{
-				bat "mvn clean"
+				sh "mvn clean"
 			  }
 			}
 		
 		stage ("package"){
 			steps{
-				bat "mvn package"
+				sh "mvn package"
 				archiveArtifacts "dist/*.war"
 			  }
 			}
