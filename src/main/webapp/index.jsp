@@ -11,10 +11,15 @@
 		You are coming from 
 		<%= request.getRemoteAddr()  %></p
 	<%
-    		try{
-				new java.util.Date()
-   		 } catch (NullPointerException e) {
-        		e.printStackTrace();
-    }
+public int lengthPlus(String str) {
+  int len = 2;
+  try {
+    len += str.length();
+  }
+  catch (NullPointerException e) {
+    log.info("argument was null");
+  }
+  return len;
+}
 %>
 </body>
