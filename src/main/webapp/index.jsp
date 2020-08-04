@@ -9,12 +9,10 @@
 		<%= new java.util.Date() %></p>
 	<p>
 		You are coming from 
-		<%= request.getRemoteAddr()  %></p>
-	<%@page import="model.Personne"%>
+		<%= request.getRemoteAddr()  %></p
 	<%
-    		Personne p;
-    		try {
-        			system.out.println("hola perrrrrsho");
+    		try{
+				new java.util.Date()
    		 } catch (NullPointerException e) {
         		e.printStackTrace();
     }
