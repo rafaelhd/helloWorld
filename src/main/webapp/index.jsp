@@ -10,4 +10,13 @@
 	<p>
 		You are coming from 
 		<%= request.getRemoteAddr()  %></p>
+	<%@page import="model.Personne"%>
+	<%
+    		Personne p;
+    		try {
+        			system.out.println("hola perrrrrsho");
+   		 } catch (NullPointerException e) {
+        		e.printStackTrace();
+    }
+%>
 </body>
