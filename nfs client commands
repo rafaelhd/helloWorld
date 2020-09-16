@@ -1,0 +1,18 @@
+echo "Installing autoFS..."
+sudo yum -y install autofs
+
+echo "Creating mount points"
+sudo touch /etc/auto.master.d/nfs.autofs
+sudo chmod 666 /etc/auto.master.d/nfs.autofs
+sudo echo "/nfs /etc/auto.nfs --timeout 60 --ghost" > /etc/auto.master.d/nfs.autofs
+sudo chmod 664 /etc/auto.master.d/nfs.autofs
+sudo touch /etc/auto.nfs
+sudo chmod 666 /etc/auto.nfs
+sudo echo "jenkinsHome -fstype=nfs,rw,bg,hard,intr,rsize=32768,wsize=32768,vers=4.1,proto=tcp,timeo=600,retrans=2,noatime,nodiratime,async ip_of_nfs_server:/mnt/jenkins_home" >> /etc/auto.nfs
+sudo chmod 664 /etc/auto.nfs
+sudo mkdir -pv /nfs
+sudo chmod 775 /nfs
+
+echo "Starting autoFS Service"
+sudo systemctl enable autofs
+sudo systemctl start autofs
