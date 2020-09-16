@@ -1,0 +1,14 @@
+
+echo "Installing nfs-utils on server"
+sudo yum -y install nfs-utils
+echo "Creating nfs folder to share"
+sudo mkdir /mnt/jenkins_home
+echo "Setting up exports mounts"
+sudo chmod 666 /etc/exports
+sudo echo "/mnt/jenkins_home ip_or_cider_block(rw,async,no_root_squash)" >> /etc/exports
+sudo chmod 644 /etc/exports
+echo "Enabling and starting NFS Service"
+sudo systemctl enable rpcbind
+sudo systemctl enable nfs
+sudo systemctl start rpcbind
+sudo systemctl start nfs
