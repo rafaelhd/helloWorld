@@ -1,5 +1,5 @@
 pipeline {
-	agent {label 'ec2'}
+	agent {label 'java'}
 	stages{
 		stage ("Clean"){
 			steps{
