@@ -14,3 +14,27 @@ sudo chmod 664 /etc/auto.master.d/nfs.autofs
 echo "Starting autoFS Service"
 sudo systemctl enable autofs
 sudo systemctl start autofs
+
+
+echo "Installing Sonar Runner"
+sudo wget https://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/sonar-runner-dist-2.4.zip
+sudo unzip sonar-runner-dist-2.4.zip
+sudo mv sonar-runner-dist-2.4/ sonar-runner/
+sudo sed -i 's|#sonar.host.url=http://localhost:9000|sonar.host.url=http://10.184.19.241:9000/sonar|g' /home/ec2-user/sonar-runner/conf/sonar-runner.properties
+
+
+
+echo 'set SONAR_HOME'
+export SONAR_HOME=/opt/sonarqube
+echo 'set PATH'
+export PATH=$JAVA_HOME/bin:$PATH
+echo 'set JAVA_HOME at profile level'
+sudo sed -i -e '$a export JAVA_HOME=/opt/java/java-11-openjdk-11.0.8.10-0.el7_8.x86_64' /etc/profile
+echo 'set PATH at profile level'
+sudo sed -i -e '$a export PATH=$JAVA_HOME/bin:$PATH' /etc/profile
+echo 'set JAVA_HOME at system level'
+sudo sed -i -e '$a export JAVA_HOME=/opt/java/java-11-openjdk-11.0.8.10-0.el7_8.x86_64' ~/.bashrc
+echo 'set PATH at system level'
+sudo sed -i -e '$a export PATH=$JAVA_HOME/bin:$PATH' ~/.bashrc
+echo 'refresh the sys variables'
+source ~/.bashrc
